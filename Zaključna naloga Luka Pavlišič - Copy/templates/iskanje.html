@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pravi avto</title>
+    <style>
+        body {
+            background-color: #1f1f1f;
+            color: #C9A84C;
+        }
+        .isci {
+            background-color: rgb(255, 255, 255);
+        }
+        .izbira {
+            margin-left: 30%;
+        }
+        .avti-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        img {
+            width: 300px;
+            height: 200px;
+        }
+
+        .naslov {
+            text-align: center;
+            margin-top: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .slogan {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0.7;
+            font-size: 16px;
+        }
+        input, select {
+            width: 500px;
+            height: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="naslov">Pravi avto</h1>
+
+    <h3 class="slogan">
+        <i>
+            Pravi avto za pravi denar
+        </i>
+    </h3>
+    
+    <table class="izbira">
+        <tr>
+            <td>Budget (€):</td>
+            <td><input type="number" id="budget" placeholder="Vnesi največjo ceno ali pusti prazno"></td>
+        </tr>
+        
+        <tr>
+            <td>Izgled:</td>
+            <td><select id="izgled">
+                <option value="">Vseeno</option>
+                <option value="Športen">Športen</option>
+                <option value="Luksuzen">Luksuzen</option>
+                <option value="Klasičen">Klasičen</option>
+                <option value="Mestni">Mestni</option>
+                <option value="Navaden">Navaden</option>
+            </select>
+        </tr>
+        
+        <tr>
+            <td>Menjalnik:</td>
+            <td>
+                <select id="menjalnik">
+                <option value="">Vseeno</option>
+                <option value="Avtomatski">Avtomatski</option>
+                <option value="Ročni">Ročni</option>
+                </select>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>Trg:</td>
+            <td>
+                <select id="trg">
+                <option value="">Vseeno</option>
+                <option value="Slovenski">Slovenski</option>
+                <option value="Nemški">Nemški</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Gorivo:</td>
+            <td>
+                <select id="gorivo">
+                <option value="">Vseeno</option>
+                <option value="bencin">Bencin</option>
+                <option value="diesel">Diesel</option>
+                </select>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>Tip:</td>
+            <td>
+                <select id="tip">
+                <option value="">Vseeno</option>
+                <option value="Moderen">Moderen</option>
+                <option value="Prostornejši">Prostornejši</option>
+                <option value="Terenski">Terenski</option>
+                <option value="Navaden">Navaden</option>
+                </select>
+            </td>
+        </tr>
+        
+        
+    </table>
+    
+    <div style="text-align: center;">
+        <button type="button" class="isci" onclick="isciAvte()">Išči Avte</button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        // FUNKCIJA ZA ISKANJE - ZELO PREPROSTA
+        function isciAvte() {
+            // PREBERI KAJ UPORABNIK IŠČE
+            var budget = document.getElementById("budget").value;
+            var izgled = document.getElementById("izgled").value;
+            var menjalnik = document.getElementById("menjalnik").value;
+            var trg = document.getElementById("trg").value;
+            var tip = document.getElementById("tip").value;
+            
+            // PRIKAŽI DA NALAGAMO
+            var rezultati = document.getElementById("results");
+            rezultati.innerHTML = '<div>Nalagam avte...</div>';
+            
+            // SESTAVI LINK DO PYTHON API
+            var link = '/api/avti?';
+            link = link + 'budget=' + budget + '&';
+            link = link + 'izgled=' + izgled + '&';
+            link = link + 'menjalnik=' + menjalnik + '&';
+            link = link + 'trg=' + trg + '&';
+            link = link + 'tip=' + tip;
+            
+            // KLIČI PYTHON
+            fetch(link)
+                .then(function(odgovor) {
+                    return odgovor.json();
+                })
+                .then(function(avti) {
+                    prikaziAvte(avti);
+                })
+                .catch(function(napaka) {
+                    rezultati.innerHTML = '<div>Prišlo je do napake.</div>';
+                });
+        }
+
+        // FUNKCIJA ZA PRIKAZ AVTOV - ZELO PREPROSTA
+        function prikaziAvte(avti) {
+            // KJE BOMO PRIKAZALI AVTE
+            var rezultati = document.getElementById("results");
+            
+            // ČE NI AVTOV
+            if (avti.length === 0) {
+                rezultati.innerHTML = '<div>Ni najdenih avtov. Poskusi druge filtre.</div>';
+                return;
+            }
+            
+            // ZAČNI HTML
+            var html = '<div class="avti-grid">';;
+            
+            // POGLEJ VSE AVTE
+            var i = 0;
+            while (i < avti.length) {
+                var avto = avti[i];
+                
+                // ZAČNI KARTICO ZA AVTO
+                // UPORABI PRAVI ID AVTA
+                var avto_id = avto.id;
+                html = html + '<a href="/avto' + avto_id + '">';
+                html = html + '<div>';
+                
+                // DODAJ SLIKO
+                html = html + '<img src="/static/slike/' + avto.slika + '" alt="' + avto.znamka + '">';
+                
+                // ZAČNI VSEBINO
+                html = html + '<div>';
+                
+                // DODAJ NASLOV
+                html = html + '<h3>' + avto.znamka + ' ' + avto.model + '</h3>';
+                
+                // DODAJ CENO
+                var cena_tekst = avto.cena.toLocaleString();
+                html = html + '<div>' + cena_tekst + ' €</div>';
+                
+                // DODAJ PODATKE
+                html = html + '<div>';
+                html = html + '<div><strong>Gorivo:</strong> ' + avto.gorivo + '</div>';
+                html = html + '<div><strong>Izgled:</strong> ' + avto.izgled + '</div>';
+                html = html + '<div><strong>Menjalnik:</strong> ' + avto.menjalnik + '</div>';
+                html = html + '<div><strong>Tip:</strong> ' + avto.tip + '</div>';
+                html = html + '<div><strong>Trg:</strong> ' + avto.trg + '</div>';
+                html = html + '</div>';
+                
+                // ZAPRI VSEBINO
+                html = html + '</div>';
+                
+                // ZAPRI KARTICO
+                html = html + '</div>';
+                
+                // ZAPRI LINK
+                html = html + '</a>';
+                
+                // NASLEDNJI AVTO
+                i = i + 1;
+            }
+            
+            // ZAPRI HTML
+            html = html + '</div>';
+            
+            // PRIKAŽI NA STRANI
+            rezultati.innerHTML = html;
+        }
+
+        // KO SE STRAN NALOŽI, PRIKAŽI VSE AVTE
+        window.onload = function() {
+            isciAvte();
+        };
+    </script>
+</body>
+</html>
