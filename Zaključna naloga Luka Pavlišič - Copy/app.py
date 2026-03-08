@@ -31,8 +31,6 @@ vsi_avti = [avto1, avto2, avto3, avto4, avto5, avto6, avto7, avto8, avto9, avto1
 def iskanje():
     return render_template('iskanje.html')
 
-
-
 # STRANI ZA POSAMEZNE AVTE
 @app.route('/avto1')
 def stran_avto1():
@@ -101,6 +99,7 @@ def api_avti():
     # PREBERI KAJ UPORABNIK IŠČE
     uporabnik_budget = request.args.get('budget', '')
     uporabnik_izgled = request.args.get('izgled', '')
+    uporabnik_gorivo = request.args.get('gorivo', '')
     uporabnik_menjalnik = request.args.get('menjalnik', '')
     uporabnik_trg = request.args.get('trg', '')
     uporabnik_tip = request.args.get('tip', '')
@@ -123,6 +122,10 @@ def api_avti():
             if avto_cena > uporabnik_budget_stevilo:
                 avto_ustreza = False
         
+        if uporabnik_gorivo != '':
+            avto_gorivo = avto[3]
+            if avto_gorivo != uporabnik_gorivo:
+                avto_ustreza = False
         # PREVERI IZGLED
         if uporabnik_izgled != '':
             avto_izgled = avto[4]
@@ -138,13 +141,13 @@ def api_avti():
         # PREVERI TIP
         if uporabnik_tip != '':
             avto_tip = avto[6]
-            if avto_tip != uporabnik_tip:
+            if avto_tip.lower() != uporabnik_tip.lower():
                 avto_ustreza = False
         
         # PREVERI TRG
         if uporabnik_trg != '':
             avto_trg = avto[7]
-            if avto_trg != uporabnik_trg:
+            if avto_trg.lower() != uporabnik_trg.lower():
                 avto_ustreza = False
         
         # ČE TA AVTO USTREZA, GA DODAJ
