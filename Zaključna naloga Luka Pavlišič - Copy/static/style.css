@@ -1,0 +1,121 @@
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: inherit;
+}
+
+body {
+    background-color: #06066a;
+    color: #FFFFFF;
+}
+
+.naslov {
+    text-align: center;
+    margin-top: 0px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8vh;
+    margin-bottom: 10px;
+}
+
+table {
+    text-align: center;
+    align-items: center;
+    margin: 0 auto;
+    display: table;
+    background-color: #05055d;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+table tr {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+table td {
+    background-color: #040449;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    min-width: 300px;
+    color: white;
+}
+
+.slika:hover {
+    transform: translateY(-8px);
+    transition: 0.5s;
+    box-shadow: 0 4px 12px rgba(0, 179, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.slika {
+    transition: transform 0.5s, box-shadow 1s;
+}
+
+.logo {
+    height: 10vh;
+    width: auto;
+}
+
+.podrobneje {
+    text-align: left;
+}
+
+.podrobneje tr td ul {
+    padding-left: 10px;
+}
+
+table td {
+    padding: 0 20px;
+}
+
+.podrobneje {
+    margin-bottom: 5%;
+}
+
+.tr-slike td {
+    padding: 40px;
+}
+
+.tr-naslov td {
+    padding-top: 20px;
+}
+
+.zvok td {
+    padding-bottom: 20px;
+}
+
+.podrobneje tr td ul li {
+    margin-bottom: 7px;
+    width: 600px;
+}
+
+.podnaslov {
+    text-align: center;
+}
+
+.podpodnaslov {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.spodnjatabela {
+    display: flex;
+    gap: 5%;
+    padding: 5%;
+    height: auto;    
+}
+
+.spodnjatabela div {
+    flex-grow: 1;
+}
