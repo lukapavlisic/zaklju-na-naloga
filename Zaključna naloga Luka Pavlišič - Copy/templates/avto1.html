@@ -7,25 +7,29 @@
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <p><a href="{{url_for('iskanje')}}">Pravi avto</a></p>
+
     <div>
+        <a href="{{ url_for('iskanje') }}">
+            <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="Logo">
+        </a>
+        <h1 class="naslov">BMW 320d</h1>
+        <h3 class="podnaslov">F30 2012 - 2015</h3>
+        <div class="podpodnaslov">Avtomatski menjalnik, slovenski trg</div>
         
-        <h1>BMW 320d</h1>
-        
-        <table>
-            <tr>
-                <td>Stock različica</td>
-                <td>Nadgrajena različica</td>
+        <table class="tabela-slike">
+            <tr class="tr-naslov">
+                <td>Stock izgled</td>
+                <td>Nadgrajen izgled</td>
             </tr>
-            <tr>
+            <tr class="tr-slike">
                 <td>
-                    <img src="/static/slike/avto1stock.jpg" alt="BMW 320d" width="500">
+                    <img class="slika" src="/static/slike/avto1stock.jpg" alt="BMW 320d" width="500">
                 </td>
                 <td>
-                    <img src="/static/slike/avto1nadgrajen.jpg" alt="BMW 320d" width="500">
+                    <img class="slika" src="/static/slike/avto1nadgrajen.jpg" alt="BMW 320d" width="500">
                 </td>
             </tr>
-            <tr>
+            <tr class="zvok">
                 <td>
                     <audio controls>
                         <source src="static/zvok/320dstockzvok.mp3" type="audio/mpeg">
@@ -38,30 +42,77 @@
                 </td>
             </tr>
         </table>
+        <br>
+        <br>
+        <table class="podrobneje">
+            <tr>
+                <td>
+                    <h3>Specifikacije</h3>
+                </td>
+                <td>
+                    <h3>Najpogostejše težave</h3>
+                </td>
+                <td>
+                    <h3>Možne nadgradnje</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li>Motor: 2.0-litrski 4-valjni dizelski motor (turbo), 184 KM (135 kW)</li>
+                        <li>Moment: 380 Nm pri 1.750–2.750 obratih/min</li>
+                        <li>Pospešek (0-100 km/h): 7,6 sekunde</li>
+                        <li>Najvišja hitrost: 230 km/h</li>
+                        <li>Poraba goriva: 4,1–4,5 l/100 km</li>
+                        <li>Izpust CO2: 108–120 g/km</li>
+                        <li>Pogon: Sprednji pogon, opcijsko xDrive (pogon na vsa kolesa)</li>
+                        <li>Menjalnik: 6-stopenjski ročni, 8-stopenjski avtomatski</li>
+                        <li>Vozniški asistenti: Avtomatsko zaviranje, pomoč pri vožnji, samodejni tempomat</li>
+                        <li>Notranjost: Usnjeni sedeži, prilagodljivi sedeži, klimatizacija, infotainment</li>
+                        <li>Dimenzije: 4.630 mm (dolžina), 1.800 mm (širina), 1.430 mm (višina)</li>
+                        <li>Teža: 1.500 kg (odvisno od konfiguracije)</li>
+                        <li>Vozne lastnosti: Dobra dinamika vožnje, udobje in športnost</li>
+                        <li>Varnost: 5 zvezdic (Euro NCAP), ABS, ESP, zračni jermeni</li>
+                    </ul>
+                </td>
 
-        <h3>Specifikacije</h3>
-        <ul>
-            <li>● Motor: 2.0L 4-valjni dizelski motor</li>
-            <li>● Moč: Približno 190 konjskih moči</li>
-            <li>● Pospešek: Približno 7 sekund od 0 do 100 km/h</li>
-            <li>● Poraba goriva: Približno 4-5 litrov na 100 km</li>
-        </ul>
+                <td>
+                    <ul>
+                        <li>Veriga (N47): cingljanje, ob zamudi uničen motor – 800 € - 4.500 €</li>
+                        <li>Dvomasni vztrajnik: tresenje in ropot v prostem teku – 800 € - 1.500 €</li>
+                        <li>Avtomatski menjalnik: trdo prestavljanje – 300 € - 3.500 €</li>
+                        <li>EGR ventil / DPF: mašenje pri mestni vožnji – 150 € - 1.200 €</li>
+                        <li>Kondenzator klime: poškodbe od kamenčkov – 200 € - 500 €</li>
+                        <li>iDrive: črn zaslon ali zamrznitev – 0 € - 900 €</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Folija karoserije (vinyl wrap): nova barva brez lakarja – 300 € - 3.000 €</li>
+                        <li>M-paket bodykit (lip, pragovi, difuzor): agresivnejši videz – 400 € - 2.500 €</li>
+                        <li>Zatemnjena zadnja svetila (smoke): modernejši zadek – 80 € - 400 €</li>
+                        <li>LED žarometi retrofit: ostrejša svetloba, boljši spredaj – 500 € - 1.800 €</li>
+                        <li>Platišča 19"/20" M-design: dominantnejši profil – 600 € - 2.500 €</li>
+                        <li>Tonirani filmi na steklih (15–20%): eleganca + zasebnost – 100 € - 350 €</li>
+                        <li>Carbon detajli (ogledala, spojler): sportski premium videz – 200 € - 1.500 €</li>
+                        <li>Črni emblem / debadging: čistejši minimalistični zadek – 20 € - 80 €</li>
+                        <li>Ambientalna LED razsvetljava: barvna notranjost po meri – 80 € - 400 €</li>
+                        <li>Alcantara volan in obloge: premium notranjost – 150 € - 700 €</li>
+                        <li>Nižje vzmetenje (lowering springs): čistejše linije – 200 € - 600 €</li>
+                        <li>Športni izpušni nastavki: sportski zadek brez menjave – 50 € - 300 €</li>
+                    </ul>
+                </td>    
+            </tr>
+        </table>
+        <div class="spodnjatabela">
+            <div>
+                <iframe src="https://www.youtube.com/watch?v=rarSMrg5XiI" frameborder="0"></iframe>
+            </div>
+            <div>
+                fsdf
+            </div>
+        </div>
 
-        <h3>Najpogostejše težave</h3>
-        <ul>
-            <li>● Nadgrajena različica vključuje izboljšan izpušni sistem, ki povečuje moč in izboljšuje zvok motorja.</li>
-            <li>● Posodobljena vzmetenje in zavore za boljše vozne lastnosti.</li>
-            <li>● Notranjost je opremljena z naprednimi tehnologijami, vključno z večjim zaslonom na dotik in izboljšanim avdio sistemom.</li>
-            <li>● Estetske nadgradnje, kot so športni odbijači, večji platišča in agresivnejši dizajn.</li>
-        </ul>
-
-        <h3>Možne nadgradnje</h3>
-        <ul>
-            <li>● M Optics</li>
-            <li>● Tonirana stekla</li>
-            <li>● Znižano vzmetenje</li>
-            <li>● Večja platišča</li>
-        </ul>
     </div>
 </body>
 </html>
