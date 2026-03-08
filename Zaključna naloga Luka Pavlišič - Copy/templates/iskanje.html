@@ -6,64 +6,175 @@
     <title>Pravi avto</title>
     <style>
         body {
-            background-color: #1f1f1f;
-            color: #C9A84C;
+            background-color: #06066a;
+            color: #FFFFFF;
+        }
+        .zavnos {
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
         }
         .isci {
-            background-color: rgb(255, 255, 255);
+            margin-top: 20px;
+            width: 200px;
+            background-color: #00b3ff;
+            color: #06066a;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .isci:hover {
+            background-color: #00bfff;
+            box-shadow: 0 4px 12px rgba(0, 179, 255, 0.4);
+            transform: scale(1.05);
         }
         .izbira {
-            margin-left: 30%;
+            width: 80%;
+            box-sizing: border-box;
+            border-spacing: 10px 0;
+            table-layout: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .izbira td:first-child {
+            white-space: nowrap;
+            width: 1%;
+        }
+        
+        .izbira td:last-child {
+            width: 99%;
         }
         .avti-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-top: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+            background-color: #040449;         
+            border-radius: 20px;
         }
 
-        img {
-            width: 300px;
+        .avti-grid a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .avti-grid > a > div {
+            background-color: #2C2C3E;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .avti-grid > a > div:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 4px 12px rgba(0, 179, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        .avti-grid img {
+            width: 100%;
             height: 200px;
+            object-fit: cover;
+            display: block;
         }
 
-        .naslov {
-            text-align: center;
-            margin-top: 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 36px;
-            margin-bottom: 10px;
+        .avti-grid > a > div > div:last-child {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
-        .slogan {
-            font-family: 'Open Sans', sans-serif;
-            text-align: center;
-            margin-bottom: 40px;
-            opacity: 0.7;
+
+        .avti-grid h3 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            color: #00b3ff;
+        }
+
+        .avti-grid > a > div > div > div:first-of-type {
             font-size: 16px;
+            font-weight: bold;
+            color: #00bfff;
+            margin-bottom: 12px;
         }
+
+        .avti-grid > a > div > div > div:last-child > div {
+            font-size: 13px;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+
         input, select {
-            width: 500px;
-            height: 25px;
+            box-sizing: border-box;
+            width: 800px;
+            height: 40px;
+            padding: 8px 12px;
+            border: 2px solid #00b3ff;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #06066a;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00bfff;
+            box-shadow: 0 0 8px rgba(0, 179, 255, 0.5);
+            background-color: white;
+        }
+
+        input::placeholder {
+            color: #999;
+        }
+
+        .logo {
+            margin: auto;
+            margin-bottom: 20px;
+            height: 200px;
+            width: 800px;
+            display: flex;
+        }
+
+        .zavnos {
+            width: 30%;
+            white-space: nowrap;
+        }
+
+        .izbira input,
+        .izbira select {
+            width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
 
-    <h1 class="naslov">Pravi avto</h1>
-
-    <h3 class="slogan">
-        <i>
-            Pravi avto za pravi denar
-        </i>
-    </h3>
+    <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="Logo">
     
     <table class="izbira">
         <tr>
-            <td>Budget (€):</td>
+            <td class="zavnos">Budget (€):</td>
             <td><input type="number" id="budget" placeholder="Vnesi največjo ceno ali pusti prazno"></td>
         </tr>
         
         <tr>
-            <td>Izgled:</td>
+            <td class="zavnos">Izgled:</td>
             <td><select id="izgled">
                 <option value="">Vseeno</option>
                 <option value="Športen">Športen</option>
@@ -75,7 +186,7 @@
         </tr>
         
         <tr>
-            <td>Menjalnik:</td>
+            <td class="zavnos">Menjalnik:</td>
             <td>
                 <select id="menjalnik">
                 <option value="">Vseeno</option>
@@ -86,7 +197,7 @@
         </tr>
         
         <tr>
-            <td>Trg:</td>
+            <td class="zavnos">Trg:</td>
             <td>
                 <select id="trg">
                 <option value="">Vseeno</option>
@@ -97,18 +208,18 @@
         </tr>
 
         <tr>
-            <td>Gorivo:</td>
+            <td class="zavnos">Gorivo:</td>
             <td>
                 <select id="gorivo">
                 <option value="">Vseeno</option>
-                <option value="bencin">Bencin</option>
-                <option value="diesel">Diesel</option>
+                <option value="Bencin">Bencin</option>
+                <option value="Diesel">Diesel</option>
                 </select>
             </td>
         </tr>
         
         <tr>
-            <td>Tip:</td>
+            <td class="zavnos">Tip:</td>
             <td>
                 <select id="tip">
                 <option value="">Vseeno</option>
@@ -136,6 +247,7 @@
             var budget = document.getElementById("budget").value;
             var izgled = document.getElementById("izgled").value;
             var menjalnik = document.getElementById("menjalnik").value;
+            var gorivo = document.getElementById("gorivo").value;
             var trg = document.getElementById("trg").value;
             var tip = document.getElementById("tip").value;
             
@@ -147,6 +259,7 @@
             var link = '/api/avti?';
             link = link + 'budget=' + budget + '&';
             link = link + 'izgled=' + izgled + '&';
+            link = link + 'gorivo=' + gorivo + '&';
             link = link + 'menjalnik=' + menjalnik + '&';
             link = link + 'trg=' + trg + '&';
             link = link + 'tip=' + tip;
@@ -204,8 +317,8 @@
                 
                 // DODAJ PODATKE
                 html = html + '<div>';
-                html = html + '<div><strong>Gorivo:</strong> ' + avto.gorivo + '</div>';
                 html = html + '<div><strong>Izgled:</strong> ' + avto.izgled + '</div>';
+                html = html + '<div><strong>Gorivo:</strong> ' + avto.gorivo + '</div>';
                 html = html + '<div><strong>Menjalnik:</strong> ' + avto.menjalnik + '</div>';
                 html = html + '<div><strong>Tip:</strong> ' + avto.tip + '</div>';
                 html = html + '<div><strong>Trg:</strong> ' + avto.trg + '</div>';
